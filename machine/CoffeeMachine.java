@@ -5,42 +5,104 @@ public class CoffeeMachine {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int water = 400;
-        int milk = 540;
+        int water = 0;
+        int milk = 0;
         int beans = 120;
         int cups = 9;
         int money = 550;
 
         while (true) {
             System.out.println("Write action (buy, fill, take,remaining, exit):");
-            String strInput = sc.next();
+            String strInput = sc.nextLine().trim();
 
             switch (strInput) {
                 case "buy":
-                    System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
-                    int choice = sc.nextInt();
+                    System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:");
+                    String choice = sc.nextLine().trim();
+                    if (choice.equals("back")) {
+                        break; // exit inner "buy" and return to main menu
+                    }
                     switch (choice) {
-                        case 1 -> {
-                            water -= 250;
-                            beans -= 16;
-                            money += 4;
-                            cups -= 1;
+
+                        case "1" -> {
+                            String missing1 = "";
+
+                            if (water < 250) {//250
+                                missing1 += "water ";
+                            }
+                            if (beans < 16) {
+                                missing1 += "beans ";
+                            }
+                            if (cups < 1) {
+                                missing1 += "cups ";
+                            }
+                            if (!missing1.isEmpty()) {
+                                System.out.println("Sorry, not enough " + missing1.trim() + "!");
+                            } else {
+                                System.out.println("I have enough resources, making you a coffee!");
+                                water -= 250;
+                                beans -= 16;
+                                money += 4;
+                                cups -= 1;
+                            }
                         }
-                        case 2 -> {
-                            water -= 350;
-                            milk -= 75;
-                            beans -= 20;
-                            money += 7;
-                            cups -= 1;
+
+                        case "2" -> {
+                            String missing2 = "";
+
+                            if (water < 350) {
+                                missing2 += "water ";
+                            }
+                            if (beans < 20) {
+                                missing2 += "beans ";
+                            }
+                            if (cups < 1) {
+                                missing2 += "cups ";
+                            }
+                            if(milk<75){
+                                missing2 += "milk ";
+                            }
+                            if (!missing2.isEmpty()) {
+                                System.out.println("Sorry, not enough " + missing2.trim() + "!");
+                            } else {
+                                System.out.println("I have enough resources, making you a coffee!");
+                                water -= 350;
+                                beans -= 20;
+                                money += 7;
+                                milk -= 75;
+                                cups -= 1;
+                            }
+
                         }
-                        case 3 -> {
-                            water -= 200;
-                            milk -= 100;
-                            beans -= 12;
-                            money += 6;
-                            cups -= 1;
+                        case "3" -> {
+                            String missing3 = "";
+
+                            if (water < 200) {
+                                missing3 += "water ";
+                            }
+                            if (beans < 12) {
+                                missing3 += "beans ";
+                            }
+                            if (cups < 1) {
+                                missing3 += "cups ";
+                            }
+                            if(milk<100){
+                                missing3 += "milk ";
+                            }
+                            if (!missing3.isEmpty()) {
+                                System.out.println("Sorry, not enough " + missing3.trim() + "!");
+                            } else {
+                                System.out.println("I have enough resources, making you a coffee!");
+                                water -= 200;
+                                beans -= 12;
+                                money += 6;
+                                milk -= 100;
+                                cups -= 1;
+                            }
+
                         }
                     }
+
                     break; // break OUT of "buy", return to outer loop
 
                 case "fill":

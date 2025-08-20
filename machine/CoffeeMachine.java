@@ -1,96 +1,81 @@
 package machine;
-import java.util.Scanner;  // Import the Scanner class
-
+import java.util.Scanner;
 
 public class CoffeeMachine {
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
 
+        int water = 400;
+        int milk = 540;
+        int beans = 120;
+        int cups = 9;
+        int money = 550;
 
-        System.out.println("""
-                The coffee machine has:
-                400 ml of water
-                540 ml of milk
-                120 g of coffee beans
-                9 disposable cups
-                $550 of money
-                """);
+        while (true) {
+            System.out.println("Write action (buy, fill, take,remaining, exit):");
+            String strInput = sc.next();
 
-        System.out.println("Write action (buy, fill, take):");
-        String strInput = sc.nextLine(); // available water
+            switch (strInput) {
+                case "buy":
+                    System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
+                    int choice = sc.nextInt();
+                    switch (choice) {
+                        case 1 -> {
+                            water -= 250;
+                            beans -= 16;
+                            money += 4;
+                            cups -= 1;
+                        }
+                        case 2 -> {
+                            water -= 350;
+                            milk -= 75;
+                            beans -= 20;
+                            money += 7;
+                            cups -= 1;
+                        }
+                        case 3 -> {
+                            water -= 200;
+                            milk -= 100;
+                            beans -= 12;
+                            money += 6;
+                            cups -= 1;
+                        }
+                    }
+                    break; // break OUT of "buy", return to outer loop
 
-        switch (strInput) {
-            case "buy":
-                System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
-                int choice = sc.nextInt();
-                switch (choice) {
-                    case 1:
-                        System.out.println("""
-                                The coffee machine has:
-                                150 ml of water
-                                540 ml of milk
-                                104 g of coffee beans
-                                8 disposable cups
-                                $554 of money""");
-                        break;
-                    case 2:
-                        System.out.println("""
-                                The coffee machine has:
-                                50 ml of water
-                                465 ml of milk
-                                100 g of coffee beans
-                                8 disposable cups
-                                $557 of money""");
-                        break;
-                    case 3:
-                        System.out.println("""
-                                The coffee machine has:
-                                200 ml of water
-                                440 ml of milk
-                                108 g of coffee beans
-                                8 disposable cups
-                                $556 of money""");
-                        break;
+                case "fill":
+                    System.out.println("Write how many ml of water you want to add:");
+                    water += sc.nextInt();
+                    System.out.println("Write how many ml of milk you want to add:");
+                    milk += sc.nextInt();
+                    System.out.println("Write how many grams of coffee beans you want to add:");
+                    beans += sc.nextInt();
+                    System.out.println("Write how many disposable cups you want to add:");
+                    cups += sc.nextInt();
+                    break;
 
-                }
-                break;
-            case "fill":
-                int water = 400;
-                int milk = 540;
-                int beans = 120;
-                int cups = 9;
+                case "take":
+                    System.out.println("I gave you $" + money);
+                    money = 0;
+                    break;
 
-                System.out.println("Write how many ml of water you want to add:");
-                int waterAmount = sc.nextInt();
-                System.out.println("Write how many ml of milk you want to add:");
-                int milkAmount = sc.nextInt();
-                System.out.println("Write how many grams of coffee beans you want to add:");
-                int beansAmount = sc.nextInt();
-                System.out.println("Write how many disposable cups you want to add:");
-                int cupsAmount = sc.nextInt();
+                case "remaining":
+                    System.out.println("""
+                            The coffee machine has:
+                            """ + water + " ml of water\n" +
+                            milk + " ml of milk\n" +
+                            beans + " g of coffee beans\n" +
+                            cups + " disposable cups\n" +
+                            "$" + money + " of money");
+                    break;
 
-                System.out.println("The coffee machine has:\n" +
-                        (water + waterAmount) + " ml of water\n"+
-                        (milk+milkAmount)+" ml of milk\n"+
-                        (beans+beansAmount)+" of coffee beans\n"+
-                         (cups+cupsAmount)+" disposable cups\n550$ of money");
-                sc.close();
-                break;
-            case "take":
-                System.out.println("I gave you " + 550);
-                System.out.println("""
-                        The coffee machine has:
-                        400 ml of water
-                        540 ml of milk
-                        120 g of coffee beans
-                        9 disposable cups
-                        $0 of money""");
+                case "exit":
+                    return; // end program
+            }
         }
-
     }
-
 }
+
 //package machine;
 //import java.util.Scanner;
 //
